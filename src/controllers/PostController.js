@@ -11,10 +11,13 @@ module.exports = {
 
     const { description } = req.body;
 
-    const post = await Post.create({
-      description
-    });
+    try {
+      const post = await Post.create({ description });
+      return res.json(post);
+    } catch (err) {
+      console.log(err);
+      return res.json({ msg: 'Verifique os campos' });
+    }
 
-    return res.json(post)
   }
 }   
